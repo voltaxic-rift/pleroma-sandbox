@@ -19,6 +19,10 @@ Vagrant.configure('2') do |config|
       n.vm.hostname = "pleroma#{i}"
       n.vm.network 'private_network', ip: "192.168.57.20#{i}"
       n.vm.synced_folder '.', '/vagrant', create: true, owner: "vagrant", group: "vagrant", type: "sshfs"
+      n.vm.provision :shell, inline: 'setenforce 0'
+      n.vm.provision :shell, path: 'scripts/download_pleroma_source.sh'
+      n.vm.provision :shell, path: 'scripts/extract_pleroma_source.sh'
+      n.vm.provision :shell, path: 'scripts/setup_docker.sh'
     end
   end
 
