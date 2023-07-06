@@ -2,7 +2,7 @@ import Config
 
 config :pleroma, Pleroma.Web.Endpoint,
   secret_key_base: "+eyRmJ+kUUL2VlQzyQGmiF/CT27pMkrm3iSxjKlHqyeTiUdWCbzzGirTju2DhF2o",
-  signing_salt: "Aav+PBJl"
+  signing_salt: "Aav+PBJl",
   live_view: [signing_salt: "Y76Z8KFy"]
 
 config :web_push_encryption, :vapid_details,
