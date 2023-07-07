@@ -23,6 +23,9 @@ Vagrant.configure('2') do |config|
       n.vm.provision :shell, path: 'scripts/download_pleroma_source.sh'
       n.vm.provision :shell, path: 'scripts/extract_pleroma_source.sh'
       n.vm.provision :shell, path: 'scripts/setup_docker.sh'
+      n.vm.provision :shell, path: 'scripts/setup_pleroma.sh'
+      n.vm.provision :shell, path: 'scripts/setup_certificates.sh'
+      n.vm.provision :shell, path: 'scripts/setup_nginx.sh'
     end
   end
 

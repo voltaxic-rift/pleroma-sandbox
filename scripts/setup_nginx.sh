@@ -8,3 +8,5 @@ dnf install -y nginx
 sed -ri "s/%HOSTNAME%/$(hostname)/g" /etc/nginx/conf.d/pleroma.conf
 
 \cp -rf /vagrant/certs /opt/pleroma-docker/
+
+systemctl enable --now nginx
