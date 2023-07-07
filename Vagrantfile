@@ -3,6 +3,14 @@
 
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
 
+hosts = <<~EOS_VAGRANT
+  cat << EOS >> /etc/hosts
+  192.168.57.201 pleroma1.local
+  192.168.57.202 pleroma2.local
+  192.168.57.203 pleroma3.local
+  EOS
+EOS_VAGRANT
+
 Vagrant.configure('2') do |config|
   config.vm.box = "almalinux/8"
   config.vm.box_version = "8.8.20230524"
@@ -20,6 +28,7 @@ Vagrant.configure('2') do |config|
       n.vm.network 'private_network', ip: "192.168.57.20#{i}"
       n.vm.synced_folder '.', '/vagrant', create: true, owner: "vagrant", group: "vagrant", type: "sshfs"
       n.vm.provision :shell, inline: 'setenforce 0'
+      n.vm.provision :shell, inline: hosts
       n.vm.provision :shell, path: 'scripts/download_pleroma_source.sh'
       n.vm.provision :shell, path: 'scripts/extract_pleroma_source.sh'
       n.vm.provision :shell, path: 'scripts/setup_docker.sh'
